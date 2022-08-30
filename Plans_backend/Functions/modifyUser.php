@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $db = new DbOperation();
 
-    $result = $db->modifyUser($username, $password, $age, $name, $phon, $description, $image);
+    $result = $db->modifyUser($username, $password, $age, $name, $phone, $description, $image);
     
     if($result == true){
         $response['error'] = false;

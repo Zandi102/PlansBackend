@@ -108,11 +108,11 @@ class DbOperation
     }
 
     // modifies all user's information
-    public function modifyUser($username, $password, $age, $name, $phone, $description)
+    public function modifyUser($username, $password, $age, $name, $phone, $description, $image)
     {
         $result;
         try{
-        $stmt = $this->conn->query("UPDATE User SET password = '$password', age = '$age', name = '$name', phone = '$phone', description = '$description' WHERE username = '$username'");
+        $stmt = $this->conn->query("UPDATE User SET password = '$password', age = '$age', name = '$name', phone = '$phone', description = '$description', image = '$image' WHERE username = '$username'");
         $result = $stmt;
         }
         catch(mysqli_sql_exception $e)
