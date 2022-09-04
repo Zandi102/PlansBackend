@@ -95,7 +95,6 @@ class DbOperation
     // removes a user from database
     public function removeUser($username)
     {
-        $result;
         try{
             $stmt = $this->conn->query("DELETE FROM User WHERE username = '$username'");
             $result = $stmt;
@@ -110,7 +109,6 @@ class DbOperation
     // modifies all user's information
     public function modifyUser($username, $password, $age, $name, $phone, $description, $image)
     {
-        $result;
         try{
         $stmt = $this->conn->query("UPDATE User SET password = '$password', age = '$age', name = '$name', phone = '$phone', description = '$description', image = '$image' WHERE username = '$username'");
         $result = $stmt;
@@ -134,7 +132,6 @@ class DbOperation
     // creates a new plan 
     public function createPlan($username, $description, $plan_name, $startTime, $endTime, $date, $address)
     {
-        $result;
         try{
             $stmt = $this->conn->query("INSERT INTO Plan (username, description, plan_name, startTime, endTime, date, address) 
             VALUES ('$username', '$description', '$plan_name', '$startTime', '$endTime', '$date', '$address')");
@@ -186,7 +183,6 @@ class DbOperation
 
     public function deletePlan($plan_id)
     {
-        $result;
         try{
             $stmt = $this->conn->query("DELETE FROM Plan WHERE plan_id = $plan_id");
             $result = $this->conn->affected_rows > 0;
@@ -227,6 +223,16 @@ class DbOperation
     public function loadFriends($username)
     {
         $stmt = $this->conn->query("SELECT H.username2, U.name FROM hasFriend as H, User as U WHERE H.username1 = '$username' AND H.isAdded = 1 AND U.username = H.username2");
+        $resultarray = array();
+		while($row=mysqli_fetch_assoc($stmt)) {
+			$resultarray[] = $row;
+		}
+        return $resultarray;
+    }
+
+    public function loadUserByPhone($phone)
+    {
+        $stmt = $this->conn->query("SELECT * FROM User WHERE phone = '$phone'");
         $resultarray = array();
 		while($row=mysqli_fetch_assoc($stmt)) {
 			$resultarray[] = $row;
