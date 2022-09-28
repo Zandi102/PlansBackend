@@ -27,6 +27,18 @@ class DbOperation
         return $result; 
     }
 
+        public function register2($username, $password, $name, $phone, $age, $description)
+    {
+        try{
+            $stmt = $this->conn->query("INSERT INTO User (username, password, name, phone, age, description) VALUES ('$username', '$password', '$name', '$phone', '$age', '$description')");
+            $result = $stmt;
+        }
+        catch (mysqli_sql_exception $e){ 
+            $result = false;
+        }
+        return $result; 
+    }
+
     public function register3($username, $password, $phone)
     {
         try{
@@ -59,18 +71,6 @@ class DbOperation
         }
         catch (mysqli_sql_exception $e){ 
             echo json_encode($e);
-            $result = false;
-        }
-        return $result; 
-    }
-
-    public function register2($username, $password, $name, $phone, $age, $description)
-    {
-        try{
-            $stmt = $this->conn->query("INSERT INTO User (username, password, name, phone, age, description) VALUES ('$username', '$password', '$name', '$phone', '$age', '$description')");
-            $result = $stmt;
-        }
-        catch (mysqli_sql_exception $e){ 
             $result = false;
         }
         return $result; 
